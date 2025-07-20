@@ -1,0 +1,247 @@
+.user-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+  }
+}
+
+.search-container {
+  max-width: 500px;
+  margin: 0 auto 30px;
+
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .search-input {
+      width: 100%;
+      padding: 15px 20px;
+      border: 2px solid #e1e8ed;
+      border-radius: 25px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+
+      &:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+
+      &::placeholder {
+        color: #95a5a6;
+      }
+    }
+
+    .clear-btn {
+      position: absolute;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #95a5a6;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover {
+        background-color: #ecf0f1;
+        color: #7f8c8d;
+      }
+    }
+  }
+
+  .search-results {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #7f8c8d;
+
+    .no-results {
+      color: #e74c3c;
+    }
+  }
+}
+
+.error {
+  text-align: center;
+  padding: 40px 20px;
+  color: #e74c3c;
+  background-color: #fdf2f2;
+  border: 1px solid #f5c6cb;
+  border-radius: 12px;
+  margin: 20px 0;
+
+  .retry-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: #c0392b;
+    }
+  }
+}
+
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.user-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #e1e8ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .user-info {
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 20px;
+
+    h3 {
+      margin: 0 0 8px 0;
+      color: #2c3e50;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .user-email {
+      margin: 6px 0;
+      color: #7f8c8d;
+      font-size: 14px;
+    }
+
+    .user-company {
+      margin: 6px 0;
+      color: #95a5a6;
+      font-size: 13px;
+      font-style: italic;
+    }
+  }
+
+  .detail-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+.no-results-message {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7f8c8d;
+
+  .no-results-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+
+  .clear-search-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: #2980b9;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .user-list-container {
+    padding: 15px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .search-container {
+    max-width: 100%;
+
+    .search-box .search-input {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+  }
+
+  .user-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

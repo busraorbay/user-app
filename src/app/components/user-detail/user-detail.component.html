@@ -1,0 +1,110 @@
+<div class="user-detail-container">
+  <div class="navigation">
+    <button routerLink="/users" class="back-btn">
+      <span class="back-icon">←</span>
+      Geri Dön
+    </button>
+  </div>
+
+  <app-loading
+    [isLoading]="loading"
+    message="Kullanıcı bilgileri yükleniyor..."
+  ></app-loading>
+
+  <div *ngIf="error" class="error">
+    <div class="error-icon">⚠️</div>
+    <h3>Bir hata oluştu</h3>
+    <p>{{ error }}</p>
+    <button (click)="loadUser(getUserId())" class="retry-btn">
+      Tekrar Dene
+    </button>
+  </div>
+
+  <div *ngIf="user && !loading && !error" class="user-detail">
+    <div class="user-header-card">
+      <div class="user-avatar-large">
+        {{ user.name.charAt(0).toUpperCase() }}
+      </div>
+      <div class="user-header-info">
+        <h1>{{ user.name }}</h1>
+        <p class="user-email">{{ user.email }}</p>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-card contact-card">
+        <div class="card-header">
+          <div class="card-icon">📞</div>
+          <h3>İletişim Bilgileri</h3>
+        </div>
+        <div class="card-content">
+          <div class="info-row">
+            <span class="info-label">E-posta:</span>
+            <a [href]="'mailto:' + user.email" class="info-value email-link">
+              {{ user.email }}
+            </a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Telefon:</span>
+            <a [href]="'tel:' + user.phone" class="info-value phone-link">
+              {{ user.phone }}
+            </a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Website:</span>
+            <a
+              [href]="'https://' + user.website"
+              target="_blank"
+              class="info-value website-link"
+            >
+              {{ user.website }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card address-card">
+        <div class="card-header">
+          <div class="card-icon">📍</div>
+          <h3>Adres Bilgileri</h3>
+        </div>
+        <div class="card-content">
+          <div class="address-full">
+            <div class="address-line">
+              <strong>{{ user.address.suite }}</strong>
+            </div>
+            <div class="address-line">
+              {{ user.address.street }}
+            </div>
+            <div class="address-line">
+              {{ user.address.city }}, {{ user.address.zipcode }}
+            </div>
+          </div>
+          <div class="coordinates">
+            <span class="coord-label">Koordinatlar:</span>
+            <span class="coord-value">
+              {{ user.address.geo.lat }}, {{ user.address.geo.lng }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-card company-card">
+        <div class="card-header">
+          <div class="card-icon">🏢</div>
+          <h3>Şirket Bilgileri</h3>
+        </div>
+        <div class="card-content">
+          <div class="company-name">
+            {{ user.company.name }}
+          </div>
+          <div class="company-slogan">"{{ user.company.catchPhrase }}"</div>
+          <div class="company-business">
+            <span class="business-label">Faaliyet Alanı:</span>
+            <span class="business-value">{{ user.company.bs }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

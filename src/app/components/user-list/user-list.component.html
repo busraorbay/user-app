@@ -1,0 +1,83 @@
+<div class="user-list-container">
+  <div class="header">
+    <h1>Kullanıcı Listesi</h1>
+
+    <!-- Arama kutusu -->
+
+    <div class="search-container">
+      <div class="search-box">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()"
+          placeholder="Kullanıcı adına göre ara..."
+          class="search-input"
+        />
+        <button
+          *ngIf="searchTerm"
+          (click)="clearSearch()"
+          class="clear-btn"
+          title="Temizle"
+        >
+          ×
+        </button>
+      </div>
+
+      <!-- Arama sonucu bilgisi -->
+      <div *ngIf="!loading && searchTerm" class="search-results">
+        <span *ngIf="filteredUsers.length > 0">
+          "{{ searchTerm }}" için {{ filteredUsers.length }} sonuç bulundu
+        </span>
+        <span *ngIf="filteredUsers.length === 0" class="no-results">
+          "{{ searchTerm }}" için sonuç bulunamadı
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <app-loading
+    [isLoading]="loading"
+    message="Kullanıcılar yükleniyor..."
+  ></app-loading>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error">
+    {{ error }}
+    <button (click)="loadUsers()" class="retry-btn">Tekrar Dene</button>
+  </div>
+
+  <!-- Users list -->
+  <div *ngIf="!loading && !error" class="user-grid">
+    <div
+      *ngFor="let user of filteredUsers; trackBy: trackByUserId"
+      class="user-card"
+    >
+      <div class="user-avatar">
+        {{ user.name.charAt(0).toUpperCase() }}
+      </div>
+      <div class="user-info">
+        <h3>{{ user.name }}</h3>
+        <p class="user-email">{{ user.email }}</p>
+        <p class="user-city">{{ user.address.city }}</p>
+
+        <p class="user-company">{{ user.company.name }}</p>
+      </div>
+      <button [routerLink]="['/user', user.id]" class="detail-btn">
+        Detayları Gör
+      </button>
+    </div>
+  </div>
+
+  <!-- Sonuç bulunamadı mesajı -->
+  <div
+    *ngIf="!loading && !error && filteredUsers.length === 0 && searchTerm"
+    class="no-results-message"
+  >
+    <div class="no-results-icon">🔍</div>
+    <h3>Sonuç bulunamadı</h3>
+    <p>"{{ searchTerm }}" araması için eşleşen kullanıcı bulunamadı.</p>
+    <button (click)="clearSearch()" class="clear-search-btn">
+      Aramayı Temizle
+    </button>
+  </div>
+</div>
