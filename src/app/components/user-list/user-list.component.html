@@ -2,8 +2,6 @@
   <div class="header">
     <h1>Kullanıcı Listesi</h1>
 
-    <!-- Arama kutusu -->
-
     <div class="search-container">
       <div class="search-box">
         <input
@@ -23,7 +21,6 @@
         </button>
       </div>
 
-      <!-- Arama sonucu bilgisi -->
       <div *ngIf="!loading && searchTerm" class="search-results">
         <span *ngIf="filteredUsers.length > 0">
           "{{ searchTerm }}" için {{ filteredUsers.length }} sonuç bulundu
@@ -40,13 +37,11 @@
     message="Kullanıcılar yükleniyor..."
   ></app-loading>
 
-  <!-- Error state -->
   <div *ngIf="error" class="error">
     {{ error }}
     <button (click)="loadUsers()" class="retry-btn">Tekrar Dene</button>
   </div>
 
-  <!-- Users list -->
   <div *ngIf="!loading && !error" class="user-grid">
     <div
       *ngFor="let user of filteredUsers; trackBy: trackByUserId"
@@ -68,7 +63,6 @@
     </div>
   </div>
 
-  <!-- Sonuç bulunamadı mesajı -->
   <div
     *ngIf="!loading && !error && filteredUsers.length === 0 && searchTerm"
     class="no-results-message"

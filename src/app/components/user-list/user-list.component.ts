@@ -14,15 +14,14 @@ import { LoadingComponent } from '../loading/loading.component';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  users: User[] = []; // Tüm kullanıcılar
-  filteredUsers: User[] = []; // Filtrelenmiş kullanıcılar
+  users: User[] = [];
+  filteredUsers: User[] = [];
   loading: boolean = true;
   error: string | null = null;
-  searchTerm: string = ''; // Arama terimi
+  searchTerm: string = '';
 
   constructor(private userService: UserService) {}
 
-  // React'teki useEffect gibi
   ngOnInit(): void {
     this.loadUsers();
   }
@@ -33,7 +32,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe({
       next: (users) => {
         this.users = users;
-        this.filteredUsers = users; // Başlangıçta tüm kullanıcıları göster
+        this.filteredUsers = users;
         this.loading = false;
       },
       error: (error) => {
@@ -44,7 +43,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  // Arama fonksiyonu
   onSearch(): void {
     if (!this.searchTerm.trim()) {
       this.filteredUsers = this.users;
@@ -55,13 +53,11 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  // Arama kutusunu temizle
   clearSearch(): void {
     this.searchTerm = '';
     this.filteredUsers = this.users;
   }
 
-  // Performance için trackBy function
   trackByUserId(index: number, user: User): number {
     return user.id;
   }
